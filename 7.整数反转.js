@@ -70,16 +70,29 @@ const reverse = x => {
   // }
 
   // 方法 2
+  // const isOverflow = n => n < Math.pow(-2, 31) || n > Math.pow(2, 31) - 1
+  // if (isOverflow(x)) return 0
+  // // Math.sing() 取正负 值为 1 或 -1
+  // const sign = Math.sign(x)
+  // // Math.abs() 取绝对值
+  // x = Math.abs(x)
+  //   .toString()
+  //   .split('')
+  //   .reverse()
+  // const ret = sign * +x.join('')
+  // return isOverflow(ret) ? 0 : ret
+
+  // 方法 3
   const isOverflow = n => n < Math.pow(-2, 31) || n > Math.pow(2, 31) - 1
   if (isOverflow(x)) return 0
-  // Math.sing() 取正负 值为 1 或 -1
   const sign = Math.sign(x)
-  // Math.abs() 取绝对值
-  x = Math.abs(x)
-    .toString()
-    .split('')
-    .reverse()
-  const ret = sign * +x.join('')
-  if (isOverflow(ret)) return 0
-  return ret
+  let y = Math.abs(x)
+  let n = 0
+  while (y != 0) {
+    let pop = y % 10
+    y = parseInt(y / 10)
+    n = n * 10 + pop
+  }
+  const ret = sign * n
+  return isOverflow(ret) ? 0 : ret
 }
